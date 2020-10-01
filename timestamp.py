@@ -14,7 +14,7 @@ for i in os.listdir(os.getcwd()):
 		counter += 1
 		print("Image {0}: {1}".format(counter, i))
         
-        # https://stackoverflow.com/a/62077871/4442148
+        	# https://stackoverflow.com/a/62077871/4442148
 		image_exif = Image.open(i)._getexif()
 		# Make a map with tag names
 		exif = { ExifTags.TAGS[k]: v for k, v in image_exif.items() if k in ExifTags.TAGS and type(v) is not bytes }

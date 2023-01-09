@@ -39,12 +39,12 @@ def main(argv):
 	print ('output postfix is     ', output_postfix)
 	print ('exif_date_tag  is     ', exif_date_tag)
 
-	font = ImageFont.truetype(truetype_font, 72)
-	fontsmall = ImageFont.truetype(truetype_font, 32)
+	font_time = ImageFont.truetype(truetype_font, 40)
+	font_date = ImageFont.truetype(truetype_font, 32)
 	fontcolor_rgb  = (238,161,6)
 	fontcolor_gray = (238)
 	counter = 0
-	if  (len(output_prefix) == 0) or len(output_postfix):
+	if  (len(output_prefix) == 0) and len(output_postfix) == 0:
 		print("A output_prefix or output_postfix is needed!")
 		sys.exit()
 
@@ -70,7 +70,7 @@ def main(argv):
 			date_obj = datetime.strptime(exif[exif_date_tag], '%Y:%m:%d %H:%M:%S')
 
 			get_exif_datex = date_obj.strftime('%Y:%m:%d')
-			get_exif_timex = date_obj.strftime('%H:%M')
+			get_exif_timex = date_obj.strftime('%H:%M:%S')
 
 			print(img.format, img.size, img.mode)
 
@@ -81,10 +81,11 @@ def main(argv):
 
 			# get a drawing context
 			draw = ImageDraw.Draw(img)
-			draw.text((img.width-220,img.height-150), get_exif_datex, fontcolor, font=fontsmall)
-			draw.text((img.width-220,img.height-120), get_exif_timex, fontcolor, font=font)
+			draw.text((img.width-200,10), get_exif_datex, fontcolor, font=font_date)
+			draw.text((img.width-200,45), get_exif_timex, fontcolor, font=font_time)
 			filename = output_directory + output_prefix + file[0:-len(image_ending)] + output_postfix + image_ending
-			img.save(filename)
+
+			img.save(filename, exif=img.info["exif"])
 		
 
 if __name__ == "__main__":

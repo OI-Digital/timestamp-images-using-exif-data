@@ -85,7 +85,7 @@ def main(argv):
 			draw.text((img.width-200,45), get_exif_timex, fontcolor, font=font_time)
 			filename = output_directory + output_prefix + file[0:-len(image_ending)] + output_postfix + image_ending
 
-			img.save(filename, exif=img.info["exif"])
+			img.save(filename, exif=img.info["exif"]) # keep exif data
 		
 
 if __name__ == "__main__":

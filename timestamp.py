@@ -39,8 +39,14 @@ def main(argv):
 	print ('output postfix is     ', output_postfix)
 	print ('exif_date_tag  is     ', exif_date_tag)
 
-	font_time = ImageFont.truetype(truetype_font, 40)
-	font_date = ImageFont.truetype(truetype_font, 32)
+	try :
+		font_time = ImageFont.truetype(truetype_font, 40)
+		font_date = ImageFont.truetype(truetype_font, 32)
+	except OSError as error :
+		print(error)
+		print("font file not found!")
+		sys.exit()
+
 	fontcolor_rgb  = (238,161,6)
 	fontcolor_gray = (238)
 	counter = 0

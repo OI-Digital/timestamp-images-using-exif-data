@@ -4,8 +4,8 @@ import os
 from PIL import Image, ImageFont, ImageDraw, ExifTags
 from datetime import datetime
 
-font = ImageFont.truetype("PlusJakartaText-Regular.ttf", 72)
-fontsmall = ImageFont.truetype("PlusJakartaText-Regular.ttf", 32)
+font = ImageFont.truetype("/home/markus/tmp/timestamp-images-using-exif-data/PlusJakartaSans-Regular.ttf", 72)
+fontsmall = ImageFont.truetype("/home/markus/tmp/timestamp-images-using-exif-data/PlusJakartaSans-Regular.ttf", 32)
 fontcolor = (238,161,6)
 counter = 0
 # Go through each file in current directory
@@ -25,7 +25,11 @@ for i in os.listdir(os.getcwd()):
 		get_exif_timex = date_obj.strftime('%H:%M')
 
 		img = Image.open(i)
- 
+		print(img.format, img.size, img.mode)
+
+		if(img.mode == "L"):
+			fontcolor = (255)
+
 		# get a drawing context
 		draw = ImageDraw.Draw(img)
 		draw.text((img.width-220,img.height-150), get_exif_datex, fontcolor, font=fontsmall)
